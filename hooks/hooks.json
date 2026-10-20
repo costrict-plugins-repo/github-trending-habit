@@ -1,0 +1,26 @@
+{
+  "description": "Habit hooks. SessionStart writes the CLI shim, migrates once, loads the standing rules, and announces when distill is due. UserPromptSubmit captures each prompt into the local inbox.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/habit-hook.sh\" session-start"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/habit-hook.sh\" capture",
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
+}
